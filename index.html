@@ -429,21 +429,72 @@
   }
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
-  /* ── META BANNER ─────────────────────────── */
-  .meta-banner {
-    background: linear-gradient(90deg, rgba(37,99,235,0.07), rgba(124,58,237,0.07));
-    border-top: 1px solid rgba(37,99,235,0.15);
-    border-bottom: 1px solid rgba(37,99,235,0.15);
+  /* ── META PROOF ─────────────────────────── */
+  .meta-proof {
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 60%, #0f172a 100%);
+    padding: 64px 24px;
     text-align: center;
-    padding: 14px 24px;
-    font-size: 0.85rem;
-    color: var(--muted);
-    display: flex; align-items: center; justify-content: center; gap: 10px;
+    position: relative;
+    overflow: hidden;
   }
-  .meta-banner .meta-icon {
-    color: var(--accent);
-    font-size: 1rem;
-    flex-shrink: 0;
+  .meta-proof::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 20% 50%, rgba(37,99,235,0.2), transparent),
+      radial-gradient(ellipse 50% 70% at 80% 50%, rgba(124,58,237,0.2), transparent);
+    pointer-events: none;
+  }
+  .meta-proof-inner {
+    position: relative;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .meta-proof-label {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50px;
+    padding: 6px 16px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #a78bfa;
+    margin-bottom: 24px;
+  }
+  .meta-proof-label .pulse {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #a78bfa;
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.4; transform: scale(0.8); }
+  }
+  .meta-proof h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 400;
+    color: white;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .meta-proof h2 em {
+    font-style: italic;
+    background: linear-gradient(135deg, #60a5fa, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .meta-proof p {
+    color: rgba(255,255,255,0.55);
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.7;
+    max-width: 480px;
+    margin: 0 auto;
   }
 
   @media (max-width: 600px) {
@@ -482,10 +533,13 @@
   </div>
 </section>
 
-<!-- META BANNER -->
-<div class="meta-banner">
-  <span class="meta-icon">✦</span>
-  Este site foi criado usando exatamente o mesmo processo que oferecemos para você — IA + experiência humana, do briefing ao ar em dias.
+<!-- META PROOF -->
+<div class="meta-proof">
+  <div class="meta-proof-inner">
+    <div class="meta-proof-label"><span class="pulse"></span> Prova real</div>
+    <h2>Este site foi criado com <em>Inteligência Artificial</em></h2>
+    <p>Do zero ao ar em dias — usando exatamente o mesmo processo que oferecemos para você. O que você está vendo agora é o resultado.</p>
+  </div>
 </div>
 
 <!-- PROOF STRIP -->
