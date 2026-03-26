@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bruno Kaefer — Designer & Ilustrador</title>
+  <!-- refs: https://sagmeisterwalsh.com, https://studiodbxl.com, https://awwwards.com -->
+  <!-- obs_ref: Composições assimétricas, tipografia expressiva, uso ousado de cores e muito movimento visual. -->
+  <!-- obs_imagens: Grid irregular para portfólio. Fundo escuro para destacar peças. Foto de perfil experimental. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0d0d;
+      --bg2: #141414;
+      --bg3: #1a1a1a;
+      --orange: #ff6b35;
+      --purple: #b14cf7;
+      --white: #f0ede8;
+      --mid: #888;
+      --border: rgba(255,255,255,.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* CURSOR ACCENT */
+    ::selection { background: var(--orange); color: var(--bg); }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.6rem 4rem;
+      mix-blend-mode: normal;
+    }
+
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: -.02em;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--orange); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+      align-items: center;
+    }
+    .nav-links a {
+      font-size: .78rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      background: var(--orange);
+      color: var(--bg) !important;
+      padding: .6rem 1.6rem;
+      font-weight: 500 !important;
+      letter-spacing: .06em !important;
+      transition: background .2s, transform .2s !important;
+    }
+    .nav-cta:hover { background: #ff8555 !important; transform: translateY(-2px); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 8rem 4rem 6rem;
+      gap: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-glyph {
+      position: absolute;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 40vw;
+      line-height: 1;
+      color: rgba(255,255,255,.018);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -.05em;
+    }
+
+    .hero-left { position: relative; z-index: 1; }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      border: 1px solid var(--border);
+      padding: .4rem 1rem .4rem .5rem;
+      border-radius: 2rem;
+      font-size: .72rem;
+      color: var(--mid);
+      letter-spacing: .08em;
+      margin-bottom: 3rem;
+    }
+    .hero-tag-dot {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--orange), var(--purple));
+      flex-shrink: 0;
+    }
+
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(3.5rem, 7vw, 6.5rem);
+      line-height: .95;
+      letter-spacing: -.03em;
+      margin-bottom: 2rem;
+    }
+    .hero h1 .line-orange { color: var(--orange); display: block; }
+    .hero h1 .line-purple { color: var(--purple); display: block; font-style: italic; font-weight: 600; }
+
+    .hero-desc {
+      color: var(--mid);
+      max-width: 420px;
+      font-size: .97rem;
+      margin-bottom: 3rem;
+      line-height: 1.8;
+    }
+
+    .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+
+    .btn-primary {
+      background: var(--orange);
+      color: var(--bg);
+      padding: .9rem 2.4rem;
+      font-family: 'Syne', sans-serif;
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: inline-block;
+      transition: background .2s, transform .2s;
+    }
+    .btn-primary:hover { background: #ff8555; transform: translateY(-2px); }
+
+    .btn-ghost {
+      color: var(--white);
+      font-size: .8rem;
+      font-weight: 500;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,.25);
+      padding-bottom: 2px;
+      transition: border-color .2s, color .2s;
+    }
+    .btn-ghost:hover { border-color: var(--orange); color: var(--orange); }
+
+    .hero-right {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .hero-photo-wrap {
+      position: relative;
+      width: 360px;
+    }
+    .hero-photo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -12px;
+      border: 1px solid rgba(177,76,247,.2);
+      transform: rotate(3deg);
+    }
+    .hero-photo-wrap::after {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border: 1px solid rgba(255,107,53,.15);
+      transform: rotate(-2deg);
+    }
+    .hero-photo-wrap img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      filter: grayscale(20%) contrast(1.05);
+    }
+
+    .hero-clients {
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: .8rem;
+    }
+    .hero-clients small {
+      font-size: .65rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.25);
+    }
+    .clients-row {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .client-name {
+      font-family: 'Syne', sans-serif;
+      font-size: .82rem;
+      font-weight: 600;
+      color: rgba(255,255,255,.3);
+      letter-spacing: .04em;
+      transition: color .2s;
+    }
+    .client-name:hover { color: var(--white); }
+
+    /* PORTFOLIO */
+    .portfolio {
+      padding: 8rem 4rem;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 4rem;
+    }
+    .section-label {
+      font-size: .65rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: .8rem;
+    }
+    .section-header h2 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      line-height: 1;
+      letter-spacing: -.02em;
+    }
+    .section-header h2 em { font-style: italic; font-weight: 600; color: var(--purple); }
+    .section-header p { font-size: .85rem; color: var(--mid); max-width: 240px; text-align: right; }
+
+    /* GRID IRREGULAR */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: 80px;
+      gap: 1rem;
+    }
+
+    .portfolio-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .portfolio-item:nth-child(1) { grid-column: 1 / 8; grid-row: 1 / 6; }
+    .portfolio-item:nth-child(2) { grid-column: 8 / 13; grid-row: 1 / 4; }
+    .portfolio-item:nth-child(3) { grid-column: 8 / 11; grid-row: 4 / 7; }
+    .portfolio-item:nth-child(4) { grid-column: 11 / 13; grid-row: 4 / 8; }
+    .portfolio-item:nth-child(5) { grid-column: 1 / 5; grid-row: 6 / 9; }
+    .portfolio-item:nth-child(6) { grid-column: 5 / 11; grid-row: 6 / 9; }
+
+    .portfolio-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .5s ease, filter .4s ease;
+      filter: grayscale(15%) brightness(.9);
+    }
+    .portfolio-item:hover img {
+      transform: scale(1.06);
+      filter: grayscale(0%) brightness(1);
+    }
+
+    .portfolio-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(13,13,13,.85) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity .3s;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.5rem;
+    }
+    .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+
+    .portfolio-info { transform: translateY(8px); transition: transform .3s; }
+    .portfolio-item:hover .portfolio-info { transform: translateY(0); }
+
+    .portfolio-cat {
+      font-size: .62rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--orange);
+      display: block;
+      margin-bottom: .3rem;
+    }
+    .portfolio-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: white;
+    }
+
+    /* SOBRE */
+    .sobre {
+      padding: 8rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 8rem;
+      align-items: start;
+      background: var(--bg2);
+    }
+
+    .sobre-aside {
+      position: sticky;
+      top: 6rem;
+    }
+
+    .sobre-aside h2 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.5rem, 4vw, 3.8rem);
+      line-height: .95;
+      letter-spacing: -.03em;
+      margin-bottom: 2rem;
+    }
+    .sobre-aside h2 .accent-orange { color: var(--orange); }
+    .sobre-aside h2 .accent-purple { color: var(--purple); font-style: italic; font-weight: 600; }
+
+    .sobre-counter {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 3rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+    }
+    .counter-item {}
+    .counter-num {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 3rem;
+      line-height: 1;
+      letter-spacing: -.04em;
+      background: linear-gradient(90deg, var(--orange), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .counter-label { font-size: .75rem; color: var(--mid); letter-spacing: .06em; margin-top: .2rem; }
+
+    .sobre-content p {
+      color: rgba(240,237,232,.6);
+      margin-bottom: 1.5rem;
+      font-size: .98rem;
+      line-height: 1.9;
+    }
+
+    .sobre-skills {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+    }
+    .skill-tag {
+      border: 1px solid var(--border);
+      padding: .4rem 1rem;
+      font-size: .72rem;
+      letter-spacing: .06em;
+      color: var(--mid);
+      transition: border-color .2s, color .2s;
+    }
+    .skill-tag:hover { border-color: var(--orange); color: var(--orange); }
+
+    /* SERVIÇOS */
+    .servicos {
+      padding: 8rem 4rem;
+    }
+
+    .servicos-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      margin-top: 4rem;
+      border: 1px solid var(--border);
+    }
+
+    .servico-item {
+      padding: 3rem 2rem;
+      border-right: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      transition: background .3s;
+    }
+    .servico-item:last-child { border-right: none; }
+    .servico-item::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--orange), var(--purple));
+      transform: scaleX(0);
+      transition: transform .3s;
+    }
+    .servico-item:hover { background: var(--bg2); }
+    .servico-item:hover::before { transform: scaleX(1); }
+
+    .serv-num {
+      font-family: 'Syne', sans-serif;
+      font-size: .72rem;
+      font-weight: 700;
+      color: var(--orange);
+      letter-spacing: .15em;
+      margin-bottom: 2rem;
+      display: block;
+    }
+    .servico-item h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: .95rem;
+      line-height: 1.3;
+      margin-bottom: 1rem;
+      color: var(--white);
+    }
+    .servico-item p { font-size: .78rem; color: var(--mid); line-height: 1.6; }
+
+    /* DEPOIMENTO */
+    .depoimento {
+      background: var(--bg2);
+      padding: 8rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .depo-bg {
+      position: absolute;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 25rem;
+      line-height: 1;
+      color: rgba(255,255,255,.015);
+      top: 50%;
+      right: -2rem;
+      transform: translateY(-50%);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .depo-inner {
+      max-width: 900px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .depo-label {
+      font-size: .65rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .depo-label::after {
+      content: '';
+      display: block;
+      height: 1px;
+      width: 60px;
+      background: var(--purple);
+      opacity: .4;
+    }
+
+    .depo-quote {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.6rem, 3vw, 2.6rem);
+      line-height: 1.3;
+      letter-spacing: -.02em;
+      color: var(--white);
+      margin-bottom: 3rem;
+    }
+    .depo-quote em { color: var(--orange); font-style: italic; font-weight: 600; }
+
+    .depo-author {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .depo-line { width: 40px; height: 1px; background: var(--border); }
+    .depo-name {
+      font-size: .78rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    /* CONTATO */
+    .contato {
+      padding: 8rem 4rem;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 8rem;
+      align-items: center;
+    }
+
+    .contato-left h2 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      line-height: .95;
+      letter-spacing: -.03em;
+      margin-bottom: 2.5rem;
+    }
+    .contato-left h2 .line-o { color: var(--orange); display: block; }
+    .contato-left h2 .line-p { color: var(--purple); font-style: italic; font-weight: 600; display: block; }
+
+    .contato-left p { color: var(--mid); font-size: .95rem; max-width: 380px; margin-bottom: 3rem; }
+
+    .contato-right {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .info-item small {
+      display: block;
+      font-size: .62rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: .5rem;
+    }
+    .info-item a, .info-item p {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: -.01em;
+      transition: color .2s;
+    }
+    .info-item a:hover { color: var(--orange); }
+
+    .social-row {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .social-link {
+      font-size: .72rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color .2s;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+    .social-link:hover { color: var(--white); }
+    .social-link::before { content: '↗'; font-size: .9rem; }
+
+    /* FOOTER */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer p { font-size: .72rem; color: rgba(255,255,255,.2); letter-spacing: .08em; }
+    .footer-right {
+      font-family: 'Syne', sans-serif;
+      font-size: .72rem;
+      font-weight: 700;
+      color: rgba(255,255,255,.15);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    /* WHATSAPP */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 2rem; right: 2rem;
+      width: 3.4rem; height: 3.4rem;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,.3);
+      z-index: 999;
+      transition: transform .2s;
+      text-decoration: none;
+    }
+    .whatsapp-float:hover { transform: scale(1.1) rotate(-5deg); }
+    .whatsapp-float svg { width: 1.75rem; height: 1.75rem; fill: white; }
+
+    /* MOBILE */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+
+      .hero { grid-template-columns: 1fr; padding: 8rem 1.5rem 5rem; gap: 3rem; }
+      .hero-right { justify-content: center; }
+      .hero-photo-wrap { width: 100%; max-width: 300px; }
+
+      .portfolio { padding: 5rem 1.5rem; }
+      .portfolio-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: 160px;
+      }
+      .portfolio-item:nth-child(1) { grid-column: 1 / 3; grid-row: 1 / 3; }
+      .portfolio-item:nth-child(2) { grid-column: 1 / 2; grid-row: 3 / 5; }
+      .portfolio-item:nth-child(3) { grid-column: 2 / 3; grid-row: 3 / 5; }
+      .portfolio-item:nth-child(4) { grid-column: 1 / 2; grid-row: 5 / 7; }
+      .portfolio-item:nth-child(5) { grid-column: 2 / 3; grid-row: 5 / 7; }
+      .portfolio-item:nth-child(6) { grid-column: 1 / 3; grid-row: 7 / 9; }
+
+      .sobre { grid-template-columns: 1fr; padding: 5rem 1.5rem; gap: 3rem; }
+      .sobre-aside { position: static; }
+      .sobre-counter { flex-direction: row; flex-wrap: wrap; gap: 2rem; }
+
+      .servicos { padding: 5rem 1.5rem; }
+      .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .section-header p { text-align: left; }
+      .servicos-grid { grid-template-columns: 1fr; }
+      .servico-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .servico-item:last-child { border-bottom: none; }
+
+      .depoimento { padding: 5rem 1.5rem; }
+      .depo-bg { display: none; }
+
+      .contato { grid-template-columns: 1fr; padding: 5rem 1.5rem; gap: 3.5rem; }
+
+      footer { flex-direction: column; gap: .8rem; padding: 2rem 1.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="#">BK<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#portfolio">Trabalhos</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#servicos">Serviços</a></li>
+      <li><a href="#contato" class="nav-cta">Falar comigo</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg-glyph">BK</div>
+
+    <div class="hero-left">
+      <div class="hero-tag">
+        <div class="hero-tag-dot"></div>
+        Disponível para projetos — 2025
+      </div>
+
+      <h1>
+        Bruno
+        <span class="line-orange">Kaefer.</span>
+        <span class="line-purple">Designer.</span>
+      </h1>
+
+      <p class="hero-desc">
+        Designer gráfico e ilustrador com 7 anos de experiência em branding, identidade visual e ilustração editorial. Trabalho com marcas que não têm medo de se destacar.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#portfolio" class="btn-primary">Ver portfólio</a>
+        <a href="#contato" class="btn-ghost">Trabalhar juntos</a>
+      </div>
+
+      <div class="hero-clients">
+        <small>Clientes & colaborações</small>
+        <div class="clients-row">
+          <span class="client-name">Havaianas</span>
+          <span class="client-name">Globo</span>
+          <span class="client-name">NY Agencies</span>
+          <span class="client-name">Botanika</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-photo-wrap">
+        <img src="img/hero.jpg" alt="Bruno Kaefer" />
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section class="portfolio" id="portfolio">
+    <div class="section-header">
+      <div>
+        <p class="section-label">Trabalhos selecionados</p>
+        <h2>O que eu<br /><em>faço.</em></h2>
+      </div>
+      <p>Projetos de branding, ilustração e direção de arte para marcas nacionais e internacionais.</p>
+    </div>
+
+    <div class="portfolio-grid">
+      <div class="portfolio-item">
+        <img src="img/portfolio1.jpg" alt="Branding — Identidade Visual" />
+        <div class="portfolio-overlay">
+          <div class="portfolio-info">
+            <span class="portfolio-cat">Branding</span>
+            <span class="portfolio-title">Identidade Visual Completa</span>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <img src="img/portfolio2.jpg" alt="Ilustração Editorial" />
+        <div class="portfolio-overlay">
+          <div class="portfolio-info">
+            <span class="portfolio-cat">Design Editorial</span>
+            <span class="portfolio-title">Campanha Visual</span>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <img src="img/portfolio3.jpg" alt="Design de Embalagem" />
+        <div class="portfolio-overlay">
+          <div class="portfolio-info">
+            <span class="portfolio-cat">Embalagem</span>
+            <span class="portfolio-title">Packaging Design</span>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <img src="img/portfolio4.jpg" alt="Tipografia Expressiva" />
+        <div class="portfolio-overlay">
+          <div class="portfolio-info">
+            <span class="portfolio-cat">Motion / Arte</span>
+            <span class="portfolio-title">Direção de Arte</span>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <img src="img/portfolio5.jpg" alt="Identidade de Marca" />
+        <div class="portfolio-overlay">
+          <div class="portfolio-info">
+            <span class="portfolio-cat">Branding</span>
+            <span class="portfolio-title">Marca & Aplicações</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section class="sobre" id="sobre">
+    <div class="sobre-aside">
+      <p class="section-label">Sobre mim</p>
+      <h2>
+        Técnica<br />
+        <span class="accent-orange">rigorosa.</span><br />
+        <span class="accent-purple">Estranhamento</span><br />
+        visual.
+      </h2>
+
+      <div class="sobre-counter">
+        <div class="counter-item">
+          <div class="counter-num">7+</div>
+          <div class="counter-label">Anos de experiência</div>
+        </div>
+        <div class="counter-item">
+          <div class="counter-num">80+</div>
+          <div class="counter-label">Projetos entregues</div>
+        </div>
+        <div class="counter-item">
+          <div class="counter-num">3</div>
+          <div class="counter-label">Continentes atendidos</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sobre-content">
+      <p>Sou designer e ilustrador com 7 anos de experiência em branding, identidade visual e ilustração editorial. Já trabalhei para marcas como Havaianas e Globo, além de diversas agências em Nova York.</p>
+      <p>Meu trabalho une técnica rigorosa e estranhamento visual — acredito que as marcas mais memoráveis são aquelas que incomodam um pouco, que te forçam a olhar duas vezes.</p>
+      <p>Atendo clientes nacionais e internacionais que buscam não apenas um visual bonito, mas uma identidade com personalidade, coerência e impacto real.</p>
+
+      <div class="sobre-skills">
+        <span class="skill-tag">Branding</span>
+        <span class="skill-tag">Identidade Visual</span>
+        <span class="skill-tag">Ilustração Editorial</span>
+        <span class="skill-tag">Design de Embalagem</span>
+        <span class="skill-tag">Motion Design</span>
+        <span class="skill-tag">Direção de Arte</span>
+        <span class="skill-tag">Figma</span>
+        <span class="skill-tag">After Effects</span>
+        <span class="skill-tag">Illustrator</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section class="servicos" id="servicos">
+    <div class="section-header">
+      <div>
+        <p class="section-label">O que ofereço</p>
+        <h2>Serviços &<br /><em>soluções.</em></h2>
+      </div>
+      <p>Cada projeto começa com uma conversa honesta sobre o que a sua marca precisa.</p>
+    </div>
+
+    <div class="servicos-grid">
+      <div class="servico-item">
+        <span class="serv-num">01</span>
+        <h3>Branding & Identidade Visual</h3>
+        <p>Sistemas visuais completos — logo, paleta, tipografia, voz e aplicações.</p>
+      </div>
+      <div class="servico-item">
+        <span class="serv-num">02</span>
+        <h3>Ilustração Editorial</h3>
+        <p>Ilustrações para livros, revistas, campanhas e conteúdo digital de alta expressão.</p>
+      </div>
+      <div class="servico-item">
+        <span class="serv-num">03</span>
+        <h3>Design de Embalagem</h3>
+        <p>Embalagens que destacam o produto na prateleira e comunicam o posicionamento.</p>
+      </div>
+      <div class="servico-item">
+        <span class="serv-num">04</span>
+        <h3>Motion Design</h3>
+        <p>Animações e peças em movimento para redes sociais, apresentações e campanhas.</p>
+      </div>
+      <div class="servico-item">
+        <span class="serv-num">05</span>
+        <h3>Direção de Arte</h3>
+        <p>Conceito e supervisão visual para campanhas, editoriais e produções fotográficas.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTO -->
+  <section class="depoimento">
+    <div class="depo-bg">"</div>
+    <div class="depo-inner">
+      <div class="depo-label">Depoimento</div>
+      <p class="depo-quote">
+        "O Bruno criou uma identidade que <em>virou referência</em> no nosso segmento."
+      </p>
+      <div class="depo-author">
+        <div class="depo-line"></div>
+        <span class="depo-name">Lara M. — CEO Botanika Cosméticos</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section class="contato" id="contato">
+    <div class="contato-left">
+      <h2>
+        Vamos
+        <span class="line-o">criar</span>
+        <span class="line-p">juntos?</span>
+      </h2>
+      <p>Aberto a projetos nacionais e internacionais. Se você tem uma ideia que merece uma identidade visual à altura, me chama.</p>
+      <a href="https://wa.me/5511111111111" target="_blank" class="btn-primary">Falar pelo WhatsApp</a>
+    </div>
+
+    <div class="contato-right">
+      <div class="info-item">
+        <small>E-mail</small>
+        <a href="mailto:exemplo@email.com">exemplo@email.com</a>
+      </div>
+      <div class="info-item">
+        <small>WhatsApp</small>
+        <a href="https://wa.me/5511111111111" target="_blank">(11) 1111-1111</a>
+      </div>
+      <div class="info-item">
+        <small>Localização</small>
+        <p>Porto Alegre — RS / Remoto</p>
+      </div>
+
+      <div class="social-row">
+        <a href="https://instagram.com/exemplo" target="_blank" class="social-link">Instagram</a>
+        <a href="https://behance.net/exemplo" target="_blank" class="social-link">Behance</a>
+        <a href="https://linkedin.com/in/exemplo" target="_blank" class="social-link">LinkedIn</a>
+        <a href="https://github.com/exemplo" target="_blank" class="social-link">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 Bruno Kaefer — Design & Ilustração</p>
+    <div class="footer-right">Porto Alegre · BR</div>
+  </footer>
+
+  <!-- WHATSAPP -->
+  <a href="https://wa.me/5511111111111" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+
+</body>
+</html>

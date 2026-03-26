@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NexLabs — Automação Inteligente com IA</title>
+  <!-- refs: https://linear.app, https://vercel.com, https://stripe.com -->
+  <!-- obs_ref: Gosto do fundo escuro, gradientes vibrantes, seções bem separadas e CTAs grandes em destaque. -->
+  <!-- obs_imagens: Logo no topo (fundo escuro), screenshots do dashboard para seção de produto. Use as imagens mockup em ordem. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f0f1a;
+      --bg2: #13131f;
+      --bg3: #1a1a2e;
+      --accent: #6366f1;
+      --accent2: #818cf8;
+      --purple: #a855f7;
+      --border: rgba(255,255,255,.08);
+      --text: rgba(255,255,255,.85);
+      --muted: rgba(255,255,255,.4);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 5rem;
+      background: rgba(15,15,26,.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      text-decoration: none;
+    }
+    .logo-icon {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--accent), var(--purple));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .7rem;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -.03em;
+    }
+    .nav-logo span {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: white;
+      letter-spacing: -.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+    .nav-links a {
+      font-size: .85rem;
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: white; }
+
+    .btn-nav {
+      background: var(--accent);
+      color: white !important;
+      padding: .6rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600 !important;
+      transition: opacity .2s !important;
+    }
+    .btn-nav:hover { opacity: .85; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Gradient orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+    .orb-1 {
+      width: 500px; height: 500px;
+      background: rgba(99,102,241,.2);
+      top: -100px; left: -150px;
+    }
+    .orb-2 {
+      width: 400px; height: 400px;
+      background: rgba(168,85,247,.15);
+      bottom: -80px; right: -100px;
+    }
+    .orb-3 {
+      width: 300px; height: 300px;
+      background: rgba(99,102,241,.1);
+      top: 40%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .hero-inner { position: relative; z-index: 1; max-width: 800px; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      background: rgba(99,102,241,.15);
+      border: 1px solid rgba(99,102,241,.3);
+      padding: .45rem 1.2rem;
+      border-radius: 2rem;
+      font-size: .78rem;
+      color: var(--accent2);
+      font-weight: 500;
+      margin-bottom: 2.5rem;
+    }
+    .hero-badge::before {
+      content: '★';
+      font-size: .7rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -.04em;
+      color: white;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 .gradient-text {
+      background: linear-gradient(135deg, var(--accent), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin: 0 auto 3rem;
+      font-weight: 400;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 4rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--purple));
+      color: white;
+      padding: 1rem 2.5rem;
+      border-radius: 10px;
+      font-size: .95rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 0 40px rgba(99,102,241,.4);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 60px rgba(99,102,241,.5); }
+
+    .btn-secondary {
+      background: rgba(255,255,255,.06);
+      color: white;
+      padding: 1rem 2.5rem;
+      border-radius: 10px;
+      font-size: .95rem;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background .2s, border-color .2s;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.15); }
+
+    .hero-social {
+      font-size: .8rem;
+      color: var(--muted);
+    }
+    .hero-social strong { color: var(--accent2); }
+
+    /* DASHBOARD MOCKUP */
+    .dashboard-wrap {
+      width: 100%;
+      max-width: 880px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .dashboard-glow {
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(135deg, var(--accent), var(--purple));
+      border-radius: 16px;
+      opacity: .4;
+      filter: blur(12px);
+    }
+    .dashboard-box {
+      position: relative;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .dash-titlebar {
+      background: var(--bg3);
+      padding: .8rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .dash-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dash-dot:nth-child(1) { background: #ff5f57; }
+    .dash-dot:nth-child(2) { background: #febc2e; }
+    .dash-dot:nth-child(3) { background: #28c840; }
+    .dash-url {
+      margin-left: .8rem;
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: .2rem .8rem;
+      font-size: .72rem;
+      color: var(--muted);
+    }
+    .dash-content {
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+    }
+    .dash-card {
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.2rem;
+    }
+    .dash-card-label { font-size: .7rem; color: var(--muted); margin-bottom: .4rem; }
+    .dash-card-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+      line-height: 1;
+    }
+    .dash-card-value span { font-size: .8rem; color: #34d399; font-weight: 600; margin-left: .4rem; }
+    .dash-bar-row {
+      grid-column: 1 / -1;
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.2rem;
+    }
+    .dash-bar-label { font-size: .7rem; color: var(--muted); margin-bottom: .8rem; }
+    .dash-bars { display: flex; gap: .4rem; align-items: flex-end; height: 60px; }
+    .dash-bar {
+      flex: 1;
+      border-radius: 3px 3px 0 0;
+      background: linear-gradient(to top, var(--accent), var(--purple));
+      opacity: .7;
+      transition: opacity .2s;
+    }
+    .dash-bar:hover { opacity: 1; }
+
+    /* LOGOS */
+    .logos {
+      padding: 4rem 5rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .logos p { font-size: .75rem; color: var(--muted); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 2rem; }
+    .logos-row {
+      display: flex;
+      gap: 3rem;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .logo-item {
+      font-size: .9rem;
+      font-weight: 600;
+      color: rgba(255,255,255,.2);
+      letter-spacing: .04em;
+      transition: color .2s;
+    }
+    .logo-item:hover { color: rgba(255,255,255,.5); }
+
+    /* FEATURES */
+    .features {
+      padding: 8rem 5rem;
+    }
+
+    .features-header { text-align: center; margin-bottom: 5rem; }
+    .features-header .section-tag {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 1rem;
+    }
+    .features-header h2 {
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -.03em;
+      color: white;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .feature-item {
+      background: var(--bg);
+      padding: 3rem;
+      transition: background .2s;
+    }
+    .feature-item:hover { background: var(--bg2); }
+
+    .feature-icon {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, rgba(99,102,241,.2), rgba(168,85,247,.2));
+      border: 1px solid rgba(99,102,241,.3);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+    .feature-item h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: white;
+      margin-bottom: .6rem;
+    }
+    .feature-item p { font-size: .88rem; color: var(--muted); }
+
+    /* DEPOIMENTO */
+    .depoimento {
+      padding: 7rem 5rem;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .depoimento .quote-mark {
+      font-size: 5rem;
+      line-height: .5;
+      background: linear-gradient(135deg, var(--accent), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 2rem;
+      display: block;
+    }
+
+    .depoimento blockquote p {
+      font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+      font-weight: 500;
+      line-height: 1.5;
+      color: white;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+    }
+    .depoimento blockquote cite {
+      font-size: .82rem;
+      color: var(--muted);
+      font-style: normal;
+    }
+    .depoimento blockquote cite strong { color: var(--accent2); }
+
+    /* CTA FINAL */
+    .cta-final {
+      padding: 9rem 5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-orb {
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(99,102,241,.15), rgba(168,85,247,.1));
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      filter: blur(60px);
+      pointer-events: none;
+    }
+
+    .cta-final-inner { position: relative; z-index: 1; }
+
+    .cta-final h2 {
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 800;
+      letter-spacing: -.04em;
+      color: white;
+      margin-bottom: 1.5rem;
+      line-height: 1.05;
+    }
+    .cta-final h2 .gradient-text {
+      background: linear-gradient(135deg, var(--accent), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .cta-final p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto 3rem;
+    }
+
+    .btn-large {
+      background: linear-gradient(135deg, var(--accent), var(--purple));
+      color: white;
+      padding: 1.2rem 3.5rem;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 0 60px rgba(99,102,241,.4);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn-large:hover { transform: translateY(-3px); box-shadow: 0 0 80px rgba(99,102,241,.55); }
+
+    .cta-sub {
+      display: block;
+      margin-top: 1.2rem;
+      font-size: .8rem;
+      color: var(--muted);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 3rem 5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+    .footer-logo span { font-size: 1rem; font-weight: 700; color: white; }
+    footer p { font-size: .75rem; color: var(--muted); }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a {
+      font-size: .78rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .footer-links a:hover { color: white; }
+
+    /* WHATSAPP */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 2rem; right: 2rem;
+      width: 3.4rem; height: 3.4rem;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,.3);
+      z-index: 999;
+      transition: transform .2s;
+      text-decoration: none;
+    }
+    .whatsapp-float:hover { transform: scale(1.1); }
+    .whatsapp-float svg { width: 1.75rem; height: 1.75rem; fill: white; }
+
+    /* MOBILE */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+
+      .hero { padding: 7rem 1.5rem 4rem; }
+      .dash-content { grid-template-columns: 1fr 1fr; }
+      .dash-bar-row { grid-column: auto; }
+
+      .logos { padding: 3rem 1.5rem; }
+      .features { padding: 5rem 1.5rem; }
+      .features-grid { grid-template-columns: 1fr; }
+
+      .depoimento { padding: 5rem 1.5rem; }
+      .cta-final { padding: 6rem 1.5rem; }
+
+      footer { flex-direction: column; gap: 1.5rem; padding: 2rem 1.5rem; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="#">
+      <div class="logo-icon">NX</div>
+      <span>NexLabs</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features">Produto</a></li>
+      <li><a href="#depoimento">Cases</a></li>
+      <li><a href="https://github.com/exemplo" target="_blank">GitHub</a></li>
+      <li><a href="#beta" class="btn-nav">Acessar Beta Grátis</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <div class="hero-inner">
+      <div class="hero-badge">Startup fundada em 2023 — ex-Google &amp; Nubank</div>
+      <h1>Automatize seu trabalho<br />com <span class="gradient-text">IA real.</span></h1>
+      <p>A NexLabs conecta IA a seus processos existentes. Economize horas de trabalho manual toda semana com agentes inteligentes.</p>
+      <div class="hero-actions">
+        <a href="#beta" class="btn-primary">🚀 Quero o Beta Grátis</a>
+        <a href="#features" class="btn-secondary">Ver como funciona</a>
+      </div>
+      <p class="hero-social">Já usado por times em <strong>Slack, Notion e CRMs</strong></p>
+    </div>
+
+    <!-- Dashboard mockup -->
+    <div class="dashboard-wrap" style="margin-top:4rem">
+      <div class="dashboard-glow"></div>
+      <div class="dashboard-box">
+        <div class="dash-titlebar">
+          <div class="dash-dot"></div>
+          <div class="dash-dot"></div>
+          <div class="dash-dot"></div>
+          <span class="dash-url">app.nexlabs.io/dashboard</span>
+        </div>
+        <div class="dash-content">
+          <div class="dash-card">
+            <div class="dash-card-label">Processos automatizados</div>
+            <div class="dash-card-value">1,284 <span>↑12%</span></div>
+          </div>
+          <div class="dash-card">
+            <div class="dash-card-label">Horas economizadas</div>
+            <div class="dash-card-value">847h <span>↑60%</span></div>
+          </div>
+          <div class="dash-card">
+            <div class="dash-card-label">Agentes ativos</div>
+            <div class="dash-card-value">23 <span>↑5</span></div>
+          </div>
+          <div class="dash-bar-row">
+            <div class="dash-bar-label">Automações executadas (últimos 7 dias)</div>
+            <div class="dash-bars">
+              <div class="dash-bar" style="height:35%"></div>
+              <div class="dash-bar" style="height:50%"></div>
+              <div class="dash-bar" style="height:45%"></div>
+              <div class="dash-bar" style="height:70%"></div>
+              <div class="dash-bar" style="height:60%"></div>
+              <div class="dash-bar" style="height:85%"></div>
+              <div class="dash-bar" style="height:100%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGOS -->
+  <section class="logos">
+    <p>Integra com suas ferramentas favoritas</p>
+    <div class="logos-row">
+      <span class="logo-item">Slack</span>
+      <span class="logo-item">Notion</span>
+      <span class="logo-item">HubSpot</span>
+      <span class="logo-item">Pipedrive</span>
+      <span class="logo-item">Google Workspace</span>
+      <span class="logo-item">Zapier</span>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <div class="features-header">
+      <span class="section-tag">O produto</span>
+      <h2>Automação que realmente funciona</h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="feature-icon">⚡</div>
+        <h3>Automação de fluxos com IA</h3>
+        <p>Agentes inteligentes que entendem seu contexto e executam tarefas repetitivas automaticamente, sem configuração complexa.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🔗</div>
+        <h3>Integração com ferramentas existentes</h3>
+        <p>Conecta com Slack, Notion, CRM e dezenas de outras ferramentas. Sem trocar o que já funciona na sua empresa.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">📊</div>
+        <h3>Dashboard de métricas em tempo real</h3>
+        <p>Visualize quantas horas foram economizadas, processos executados e o impacto real da automação no seu time.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🎯</div>
+        <h3>Suporte e onboarding dedicado</h3>
+        <p>Time experiente (ex-Google e Nubank) para garantir que a implantação seja rápida e gere resultado imediato.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTO -->
+  <section class="depoimento" id="depoimento">
+    <span class="quote-mark">"</span>
+    <blockquote>
+      <p>Reduzimos em 60% o tempo gasto em relatórios mensais.</p>
+      <cite>Carlos M., <strong>CFO Empresa XYZ</strong></cite>
+    </blockquote>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-final" id="beta">
+    <div class="cta-orb"></div>
+    <div class="cta-final-inner">
+      <h2>Comece a economizar<br /><span class="gradient-text">horas hoje.</span></h2>
+      <p>Acesse o beta gratuito da NexLabs e veja na prática o que automação com IA pode fazer pelo seu time.</p>
+      <a href="https://wa.me/5511111111111" target="_blank" class="btn-large">Entrar para o Beta Grátis</a>
+      <span class="cta-sub">Sem cartão de crédito. Acesso imediato.</span>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">
+      <div class="logo-icon" style="width:28px;height:28px;font-size:.6rem">NX</div>
+      <span>NexLabs</span>
+    </div>
+    <p>&copy; 2024 NexLabs — exemplo@email.com</p>
+    <div class="footer-links">
+      <a href="https://github.com/exemplo" target="_blank">GitHub</a>
+      <a href="https://twitter.com/exemplo" target="_blank">Twitter</a>
+      <a href="https://linkedin.com/company/exemplo" target="_blank">LinkedIn</a>
+      <a href="https://instagram.com/exemplo" target="_blank">Instagram</a>
+    </div>
+  </footer>
+
+  <!-- WHATSAPP -->
+  <a href="https://wa.me/5511111111111" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+
+</body>
+</html>

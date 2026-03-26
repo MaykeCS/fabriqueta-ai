@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dra. Isabela Fontana — Advogada | Direito de Família e Sucessões</title>
+  <!-- refs: https://studiovisual.com.br, https://chadwickwatson.com -->
+  <!-- obs_ref: Gosto da tipografia serif, espaçamento generoso, tons quentes e neutros, visual de alto padrão. -->
+  <!-- obs_imagens: Foto profissional em fundo neutro para o header. Logo do escritório no topo. As fotos devem passar seriedade. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dark: #1c1c1c;
+      --gold: #c9a96e;
+      --gold-light: #dfc090;
+      --offwhite: #f9f7f4;
+      --warm: #ede9e3;
+      --mid: #7a7068;
+      --border: #e0dbd4;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--offwhite);
+      color: var(--dark);
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 5rem;
+      background: rgba(249,247,244,.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+    .nav-logo strong {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 500;
+      letter-spacing: .04em;
+      color: var(--dark);
+    }
+    .nav-logo span {
+      font-size: .65rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+      align-items: center;
+    }
+    .nav-links a {
+      font-size: .72rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--dark); }
+    .nav-links .btn-nav {
+      background: var(--dark);
+      color: var(--offwhite) !important;
+      padding: .7rem 1.8rem;
+      letter-spacing: .12em;
+      transition: background .2s !important;
+    }
+    .nav-links .btn-nav:hover { background: var(--gold); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      padding-top: 80px;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem 4rem 6rem 5rem;
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .hero-eyebrow span {
+      font-size: .68rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .hero-left h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -.01em;
+      margin-bottom: 2rem;
+    }
+    .hero-left h1 em { font-style: italic; color: var(--gold); }
+
+    .hero-left p {
+      color: var(--mid);
+      max-width: 440px;
+      margin-bottom: 3rem;
+      font-size: .97rem;
+    }
+
+    .hero-actions { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+
+    .btn-gold {
+      background: var(--gold);
+      color: white;
+      padding: .9rem 2.5rem;
+      font-family: 'Lato', sans-serif;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background .2s, transform .2s;
+      display: inline-block;
+    }
+    .btn-gold:hover { background: #b8925a; transform: translateY(-1px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--dark);
+      padding: .9rem 2.5rem;
+      font-family: 'Lato', sans-serif;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: border-color .2s, color .2s;
+      display: inline-block;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    .hero-right {
+      background: var(--warm);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-right::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 60%;
+      background: linear-gradient(to top, rgba(201,169,110,.15), transparent);
+    }
+    .hero-photo-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      padding: 3rem;
+      position: relative;
+    }
+    .hero-photo-placeholder img {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+    .hero-caption {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: .9rem;
+      color: rgba(28,28,28,.5);
+    }
+
+    /* CREDENCIAIS */
+    .credenciais {
+      background: var(--dark);
+      padding: 4rem 5rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+
+    .cred-item {
+      border-left: 1px solid rgba(201,169,110,.3);
+      padding-left: 2rem;
+    }
+    .cred-item:first-child { border-left: none; padding-left: 0; }
+    .cred-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 400;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: .3rem;
+    }
+    .cred-label {
+      font-size: .68rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.45);
+    }
+
+    /* SOBRE */
+    .sobre {
+      padding: 8rem 5rem;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 7rem;
+      align-items: center;
+    }
+
+    .sobre-aside h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 2rem;
+    }
+    .sobre-aside h2 em { font-style: italic; color: var(--gold); }
+
+    .sobre-aside .gold-line {
+      width: 48px;
+      height: 1px;
+      background: var(--gold);
+      margin-bottom: 2rem;
+    }
+
+    .sobre-content p {
+      color: #555;
+      margin-bottom: 1.4rem;
+      font-size: .97rem;
+    }
+
+    .formacao {
+      margin-top: 2.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .form-item { display: flex; gap: 1.2rem; align-items: baseline; }
+    .form-item .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+      margin-top: .55rem;
+    }
+    .form-item p { font-size: .88rem; color: var(--mid); }
+
+    /* SERVIÇOS */
+    .servicos {
+      background: var(--warm);
+      padding: 7rem 5rem;
+    }
+
+    .servicos-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 4rem;
+    }
+    .servicos-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3vw, 2.6rem);
+      font-weight: 400;
+    }
+    .servicos-header h2 em { font-style: italic; color: var(--gold); }
+    .servicos-header p { font-size: .8rem; color: var(--mid); max-width: 280px; text-align: right; }
+
+    .servicos-lista { display: flex; flex-direction: column; gap: 0; }
+
+    .servico-linha {
+      display: grid;
+      grid-template-columns: 3rem 1fr auto;
+      align-items: center;
+      gap: 2rem;
+      padding: 2.2rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: background .2s;
+      cursor: default;
+    }
+    .servico-linha:first-child { border-top: 1px solid var(--border); }
+    .servico-linha:hover { background: rgba(201,169,110,.06); }
+
+    .serv-num {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--gold);
+    }
+    .serv-nome {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+    }
+    .serv-arrow {
+      width: 20px; height: 20px;
+      opacity: .3;
+      transition: opacity .2s, transform .2s;
+    }
+    .servico-linha:hover .serv-arrow { opacity: 1; transform: translateX(4px); }
+    .serv-arrow::before { content: '→'; font-size: 1.2rem; color: var(--gold); }
+
+    /* DEPOIMENTO */
+    .depoimento {
+      padding: 8rem 5rem;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .depo-label {
+      font-size: .68rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2rem;
+    }
+
+    .depoimento blockquote p {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--dark);
+      margin-bottom: 2rem;
+    }
+    .depoimento blockquote cite {
+      font-size: .72rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--mid);
+      font-style: normal;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .depoimento blockquote cite::before {
+      content: '';
+      display: block;
+      width: 30px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .depo-ornament {
+      font-family: 'Playfair Display', serif;
+      font-size: 14rem;
+      line-height: .8;
+      color: var(--gold);
+      opacity: .07;
+      font-style: italic;
+      text-align: center;
+    }
+
+    /* CONTATO */
+    .contato {
+      background: var(--dark);
+      padding: 7rem 5rem;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .contato h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--offwhite);
+      margin-bottom: 1.5rem;
+    }
+    .contato h2 em { font-style: italic; color: var(--gold); }
+    .contato > div > p { color: rgba(255,255,255,.5); font-size: .92rem; margin-bottom: 2.5rem; }
+
+    .contato-info { display: flex; flex-direction: column; gap: 2rem; }
+    .info-item small {
+      display: block;
+      font-size: .65rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .4rem;
+    }
+    .info-item a, .info-item p {
+      font-size: .95rem;
+      color: rgba(255,255,255,.75);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .info-item a:hover { color: var(--gold); }
+
+    /* FOOTER */
+    footer {
+      background: #141414;
+      padding: 2.5rem 5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(201,169,110,.15);
+    }
+    footer p { font-size: .72rem; color: rgba(255,255,255,.3); letter-spacing: .08em; }
+    .footer-right {
+      font-size: .72rem;
+      color: rgba(255,255,255,.3);
+      letter-spacing: .08em;
+    }
+
+    /* WHATSAPP */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 2rem; right: 2rem;
+      width: 3.4rem; height: 3.4rem;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,.25);
+      z-index: 999;
+      transition: transform .2s;
+      text-decoration: none;
+    }
+    .whatsapp-float:hover { transform: scale(1.1); }
+    .whatsapp-float svg { width: 1.75rem; height: 1.75rem; fill: white; }
+
+    /* MOBILE */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 7rem 1.5rem 3rem; }
+      .hero-right { height: 300px; }
+
+      .credenciais { grid-template-columns: 1fr 1fr; padding: 3rem 1.5rem; }
+
+      .sobre { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 2.5rem; }
+      .servicos { padding: 4rem 1.5rem; }
+      .servicos-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .servicos-header p { text-align: left; }
+
+      .depoimento { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 2rem; }
+      .depo-ornament { display: none; }
+
+      .contato { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 3rem; }
+
+      footer { flex-direction: column; gap: .8rem; padding: 2rem 1.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">
+      <strong>Isabela Fontana</strong>
+      <span>Advocacia</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#sobre">A Advogada</a></li>
+      <li><a href="#servicos">Áreas de Atuação</a></li>
+      <li><a href="#contato" class="btn-nav">Agendar Consulta</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow"><span>Direito de Família e Sucessões</span></div>
+      <h1>Soluções jurídicas com <em>discrição</em> e excelência.</h1>
+      <p>15 anos de experiência dedicados às questões que mais importam: família, patrimônio e o futuro das pessoas que você ama.</p>
+      <div class="hero-actions">
+        <a href="#contato" class="btn-gold">Agendar consulta</a>
+        <a href="#servicos" class="btn-outline">Áreas de atuação</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-photo-placeholder">
+        <img src="img/hero.jpg" alt="Dra. Isabela Fontana" />
+        <span class="hero-caption" style="position:relative;z-index:1">Dra. Isabela Fontana</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREDENCIAIS -->
+  <section class="credenciais">
+    <div class="cred-item">
+      <div class="cred-num">15</div>
+      <div class="cred-label">Anos de experiência</div>
+    </div>
+    <div class="cred-item">
+      <div class="cred-num">USP</div>
+      <div class="cred-label">Formação em Direito</div>
+    </div>
+    <div class="cred-item">
+      <div class="cred-num">FGV</div>
+      <div class="cred-label">Pós em Direito Patrimonial</div>
+    </div>
+    <div class="cred-item">
+      <div class="cred-num">100%</div>
+      <div class="cred-label">Discrição garantida</div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section class="sobre" id="sobre">
+    <div class="sobre-aside">
+      <h2>Experiência que<br />faz a <em>diferença</em>.</h2>
+      <div class="gold-line"></div>
+    </div>
+    <div class="sobre-content">
+      <p>Sou advogada com 15 anos de experiência nas áreas de Direito de Família e Sucessões. Formada pela USP, com pós-graduação em Direito Patrimonial pela FGV.</p>
+      <p>Atendo pessoas que buscam soluções jurídicas com discrição e excelência — especialmente em momentos delicados que exigem sensibilidade e rigor técnico ao mesmo tempo.</p>
+      <div class="formacao">
+        <div class="form-item"><div class="dot"></div><p>Graduação em Direito — Universidade de São Paulo (USP)</p></div>
+        <div class="form-item"><div class="dot"></div><p>Pós-graduação em Direito Patrimonial — FGV</p></div>
+        <div class="form-item"><div class="dot"></div><p>Membro da OAB/SP</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section class="servicos" id="servicos">
+    <div class="servicos-header">
+      <h2>Áreas de<br /><em>atuação</em></h2>
+      <p>Atuação especializada nas questões jurídicas mais sensíveis da sua vida.</p>
+    </div>
+    <div class="servicos-lista">
+      <div class="servico-linha">
+        <span class="serv-num">01</span>
+        <span class="serv-nome">Divórcio Consensual e Litigioso</span>
+        <span class="serv-arrow"></span>
+      </div>
+      <div class="servico-linha">
+        <span class="serv-num">02</span>
+        <span class="serv-nome">Inventário e Partilha de Bens</span>
+        <span class="serv-arrow"></span>
+      </div>
+      <div class="servico-linha">
+        <span class="serv-num">03</span>
+        <span class="serv-nome">Testamentos e Planejamento Sucessório</span>
+        <span class="serv-arrow"></span>
+      </div>
+      <div class="servico-linha">
+        <span class="serv-num">04</span>
+        <span class="serv-nome">Guarda e Alimentos</span>
+        <span class="serv-arrow"></span>
+      </div>
+      <div class="servico-linha">
+        <span class="serv-num">05</span>
+        <span class="serv-nome">Reconhecimento e Dissolução de União Estável</span>
+        <span class="serv-arrow"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTO -->
+  <section class="depoimento">
+    <blockquote>
+      <p class="depo-label">Depoimento</p>
+      <p>"A Dra. Isabela cuidou do meu inventário com toda a delicadeza que o momento exigia."</p>
+      <cite>Roberto F., cliente 2023</cite>
+    </blockquote>
+    <div class="depo-ornament">"</div>
+  </section>
+
+  <!-- CONTATO -->
+  <section class="contato" id="contato">
+    <div>
+      <h2>Agende sua<br /><em>consulta</em> inicial.</h2>
+      <p>O primeiro passo para resolver uma questão jurídica é conversar com quem entende do assunto. Entre em contato.</p>
+      <a href="https://wa.me/5511111111111" target="_blank" class="btn-gold">Falar pelo WhatsApp</a>
+    </div>
+    <div class="contato-info">
+      <div class="info-item">
+        <small>E-mail</small>
+        <a href="mailto:exemplo@email.com">exemplo@email.com</a>
+      </div>
+      <div class="info-item">
+        <small>WhatsApp</small>
+        <a href="https://wa.me/5511111111111" target="_blank">(11) 1111-1111</a>
+      </div>
+      <div class="info-item">
+        <small>LinkedIn</small>
+        <a href="https://linkedin.com/in/exemplo" target="_blank">linkedin.com/in/exemplo</a>
+      </div>
+      <div class="info-item">
+        <small>Atendimento</small>
+        <p>São Paulo — SP</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2024 Isabela Fontana Advocacia — OAB/SP</p>
+    <div class="footer-right">Direito de Família &amp; Sucessões</div>
+  </footer>
+
+  <!-- WHATSAPP -->
+  <a href="https://wa.me/5511111111111" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+
+</body>
+</html>
