@@ -291,6 +291,86 @@
   footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
   footer a:hover { color: white; }
 
+  /* ── PROOF STRIP ────────────────────── */
+  .proof-strip {
+    background: var(--white);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 24px;
+    display: flex; align-items: center; justify-content: center;
+    gap: 48px; flex-wrap: wrap;
+  }
+  .proof-item { display: flex; align-items: center; gap: 10px; font-size: 0.88rem; color: var(--muted); }
+  .proof-item strong { color: var(--ink); font-weight: 600; font-size: 1rem; }
+
+  /* ── SECTION COMMON ──────────────────── */
+  .section-inner { max-width: 1080px; margin: 0 auto; }
+  .section-sub { font-size: 1.05rem; color: var(--muted); font-weight: 300; max-width: 540px; line-height: 1.7; }
+
+  /* ── QUEM SOMOS ──────────────────────── */
+  .about-section { padding: 96px 24px; }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-top: 0; }
+  @media (max-width: 700px) { .about-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+  .about-visual {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border-radius: 24px; padding: 48px 40px; color: white;
+    position: relative; overflow: hidden;
+  }
+  .about-visual::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 30% 40%, rgba(37,99,235,0.25), transparent);
+  }
+  .about-visual-content { position: relative; }
+  .exp-number {
+    font-family: 'DM Serif Display', serif; font-size: 5rem; line-height: 1; margin-bottom: 8px;
+    background: linear-gradient(135deg, #60a5fa, #a78bfa);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .exp-label { font-size: 1rem; color: rgba(255,255,255,0.7); font-weight: 300; margin-bottom: 32px; }
+  .exp-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .exp-tag {
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px; padding: 5px 14px; font-size: 0.78rem; color: rgba(255,255,255,0.8);
+  }
+  .about-text p { color: var(--muted); font-size: 1.02rem; line-height: 1.8; margin-bottom: 20px; font-weight: 300; }
+  .about-text p:last-child { margin-bottom: 0; }
+  .about-text strong { color: var(--ink); font-weight: 500; }
+
+  /* ── POR QUE NOS ─────────────────────── */
+  .why-section { background: var(--white); padding: 96px 24px; }
+  .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+  @media (max-width: 800px) { .why-grid { grid-template-columns: 1fr; } }
+
+  .why-card { padding: 32px; border: 1.5px solid var(--border); border-radius: var(--radius); transition: all 0.25s; position: relative; overflow: hidden; }
+  .why-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent2)); opacity: 0; transition: opacity 0.25s; }
+  .why-card:hover { border-color: transparent; box-shadow: 0 12px 40px rgba(0,0,0,0.08); transform: translateY(-2px); }
+  .why-card:hover::before { opacity: 1; }
+  .why-icon { font-size: 2rem; margin-bottom: 20px; }
+  .why-card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 10px; }
+  .why-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.7; }
+
+  /* ── COMO FUNCIONA ───────────────────── */
+  .process-section { padding: 96px 24px; }
+  .steps {
+    display: flex; flex-direction: column; gap: 0;
+    max-width: 600px; margin: 48px auto 0; position: relative;
+  }
+  .steps::before {
+    content: ''; position: absolute; left: 24px; top: 28px; bottom: 28px;
+    width: 1px; background: linear-gradient(to bottom, var(--accent), var(--accent2)); opacity: 0.2;
+  }
+  .step { display: flex; gap: 24px; align-items: flex-start; padding: 24px 0; }
+  .step-num {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: white; font-weight: 600; font-size: 0.9rem;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; position: relative; z-index: 1;
+  }
+  .step-content h3 { font-size: 1rem; font-weight: 600; margin-bottom: 4px; }
+  .step-content p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+
   /* ── ANIMATIONS ─────────────────────── */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
@@ -453,6 +533,107 @@
     <strong>Sobre o domínio:</strong> o site será publicado gratuitamente no GitHub Pages (ex: seuusuario.github.io/seusite). Se quiser um endereço personalizado como <strong>seunome.com</strong>, o domínio é comprado separadamente — geralmente entre R$ 40 e R$ 80 por ano. <strong>Podemos auxiliar em todo o processo de compra e configuração.</strong>
   </p>
 </div>
+
+<!-- PROOF STRIP -->
+<div class="proof-strip">
+  <div class="proof-item"><strong>10+</strong> anos de experiência</div>
+  <div class="proof-item"><strong>2–4 dias</strong> para a primeira versão</div>
+  <div class="proof-item"><strong>100%</strong> do código entregue</div>
+  <div class="proof-item"><strong>0</strong> pagamento sem aprovação</div>
+  <div class="proof-item"><strong>IA</strong> + expertise humana</div>
+</div>
+
+<!-- QUEM SOMOS -->
+<section class="about-section">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <div class="about-visual-content">
+          <div class="exp-number">10+</div>
+          <div class="exp-label">anos desenvolvendo soluções digitais</div>
+          <div class="exp-tags">
+            <span class="exp-tag">Grandes empresas</span>
+            <span class="exp-tag">Startups</span>
+            <span class="exp-tag">Full Stack</span>
+            <span class="exp-tag">UX / UI</span>
+            <span class="exp-tag">Inteligência Artificial</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-text reveal">
+        <p class="section-tag">Quem somos</p>
+        <h2 class="section-title">Desenvolvedores que falam a língua da IA</h2>
+        <p>Somos desenvolvedores com mais de <strong>10 anos de experiência</strong> em grandes empresas e startups. Passamos por projetos de alta complexidade e aprendemos o que realmente funciona no mundo digital.</p>
+        <p>Com toda essa bagagem técnica, sabemos <strong>como interagir com a IA de forma fluida</strong> — extraindo o melhor de cada ferramenta para entregar um resultado que seria impossível sem esse conhecimento profundo de TI.</p>
+        <p>A diferença? Enquanto qualquer pessoa pode usar IA, <strong>nós sabemos o que pedir, como refinar e onde hospedar</strong>. O resultado é um site profissional, sem surpresas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POR QUE NOS CONTRATAR -->
+<section class="why-section">
+  <div class="section-inner">
+    <p class="section-tag reveal">Por que nos contratar</p>
+    <h2 class="section-title reveal">IA é ferramenta. Experiência é o diferencial.</h2>
+    <p class="section-sub reveal">Qualquer um pode usar inteligência artificial. O que nos separa é saber o que fazer com ela.</p>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-icon">🧠</div>
+        <h3>Interação fluida com IA</h3>
+        <p>Nossa experiência técnica permite extrair o melhor da inteligência artificial, com prompts precisos e refinamentos que fazem a diferença no resultado final.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon">🏗️</div>
+        <h3>Sabemos como e onde fazer</h3>
+        <p>10 anos de mercado nos ensinaram as melhores práticas de arquitetura, hospedagem e publicação. Nada de gambiarras — código limpo e sólido.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon">⚡</div>
+        <h3>Velocidade sem abrir mão da qualidade</h3>
+        <p>A IA acelera a produção, mas a curadoria humana garante que cada detalhe esteja correto. Entrega rápida com qualidade de agência.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="process-section">
+  <div class="section-inner" style="text-align:center">
+    <p class="section-tag reveal">Como funciona</p>
+    <h2 class="section-title reveal">Do briefing ao ar em poucos passos</h2>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Preencha o briefing</h3>
+          <p>Responda um formulário simples sobre seu negócio, estilo e objetivos. Quanto mais detalhes, melhor o resultado.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Desenvolvemos o site <span style="font-size:0.78rem;font-weight:400;color:var(--muted);margin-left:6px">⏱ 2–4 dias</span></h3>
+          <p>Com IA e experiência, criamos a primeira versão do seu site em 2 a 4 dias — sem abrir mão da qualidade e dos detalhes.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Você aprova</h3>
+          <p>Apresentamos o projeto para você. Pedimos ajustes até que esteja exatamente como você imaginou.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h3>Publicamos e entregamos tudo</h3>
+          <p>Site no ar, código no GitHub, domínio configurado e todos os acessos nas suas mãos.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- CTA FINAL -->
 <section class="cta-section">
