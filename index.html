@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fabriqueta AI — Sites com Inteligência Artificial</title>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SLCFC4E0K1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SLCFC4E0K1');
+</script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -512,7 +520,7 @@
     <span class="logo-dot"></span>
     Fabriqueta AI
   </a>
-  <a class="nav-cta" href="briefing.html">Começar projeto</a>
+  <a class="nav-cta" href="briefing.html" onclick="gtag('event','click_cta',{button:'nav_comecar_projeto'})">Começar projeto</a>
 </nav>
 
 <!-- HERO -->
@@ -523,8 +531,8 @@
     <h1>Seu site profissional,<br>criado com <em>IA</em> e<br>experiência real</h1>
     <p>Desenvolvemos sites modernos e funcionais usando inteligência artificial — com a expertise de quem tem mais de 10 anos no mercado.</p>
     <div class="hero-actions">
-      <a class="btn-primary" href="briefing.html">Preencher briefing →</a>
-      <a class="btn-ghost" href="#o-que-entregamos">Saiba mais</a>
+      <a class="btn-primary" href="briefing.html" onclick="gtag('event','click_cta',{button:'hero_preencher_briefing'})">Preencher briefing →</a>
+      <a class="btn-ghost" href="#o-que-entregamos" onclick="gtag('event','click_cta',{button:'hero_saiba_mais'})">Saiba mais</a>
     </div>
     <p class="hero-guarantee">
       <span class="check-icon">✓</span>
@@ -700,7 +708,7 @@
         <div class="guarantee-pill"><span class="g-check">✓</span> Suporte na compra do domínio</div>
       </div>
 
-      <a class="btn-cta-white" href="briefing.html">Quero meu site agora →</a>
+      <a class="btn-cta-white" href="briefing.html" onclick="gtag('event','click_cta',{button:'cta_final_quero_meu_site'})">Quero meu site agora →</a>
     </div>
   </div>
 </section>

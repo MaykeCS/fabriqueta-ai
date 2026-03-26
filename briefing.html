@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Briefing do seu site</title>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SLCFC4E0K1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SLCFC4E0K1');
+</script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -607,7 +615,7 @@
     </div>
 
     <div class="submit-area">
-      <button class="btn-submit" onclick="enviarFormulario()">Enviar briefing →</button>
+      <button class="btn-submit" onclick="gtag('event','click_cta',{button:'briefing_enviar'});enviarFormulario()">Enviar briefing →</button>
       <p class="submit-note">Você receberá uma confirmação por e-mail em breve.</p>
     </div>
   </div>
