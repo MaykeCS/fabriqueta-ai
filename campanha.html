@@ -168,6 +168,25 @@
     display: flex; align-items: center; justify-content: center; gap: 6px;
   }
   .guarantee-line .ok { color: var(--success); }
+  .ai-banner {
+    background: linear-gradient(90deg, #eff6ff, #f5f3ff);
+    border-bottom: 1.5px solid #c7d2fe;
+    padding: 14px 24px;
+  }
+  .ai-banner-inner {
+    max-width: 860px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: center;
+    gap: 12px; flex-wrap: wrap;
+    font-size: 0.92rem; color: #1e40af;
+  }
+  .ai-banner-inner strong { font-weight: 700; color: #1d4ed8; }
+  .ai-banner-icon { font-size: 1.2rem; }
+  .ai-banner-arrow {
+    background: #1d4ed8; color: white;
+    padding: 4px 14px; border-radius: 20px;
+    font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.03em; white-space: nowrap;
+  }
 
   /* ── INCLUSO / NÃO INCLUSO ─────────────── */
   .compare-section {
@@ -401,6 +420,15 @@
 <!-- BANNER PROMO -->
 <div class="promo-top">
   🔥 Oferta por tempo limitado — <strong>R$ 200</strong> pelo seu site completo com IA. Só paga se aprovar.
+</div>
+
+<!-- BANNER IA -->
+<div class="ai-banner">
+  <div class="ai-banner-inner">
+    <span class="ai-banner-icon">🤖</span>
+    <span><strong>Esta página foi criada com IA</strong> — exatamente como faremos com o seu site.</span>
+    <span class="ai-banner-arrow">↓ veja o resultado</span>
+  </div>
 </div>
 
 <!-- HERO -->
