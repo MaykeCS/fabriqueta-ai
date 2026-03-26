@@ -346,6 +346,40 @@
   .card:nth-child(6) { animation-delay: 0.6s; }
 
   .required-note { font-size: 0.78rem; color: var(--muted); text-align: right; margin-bottom: 20px; }
+
+  /* Deploy badge */
+  .deploy-badge {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(26,26,26,0.88);
+    color: #e5e7eb;
+    font-family: monospace;
+    font-size: 0.72rem;
+    padding: 7px 12px;
+    border-radius: 20px;
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.08);
+    text-decoration: none;
+    transition: opacity 0.2s;
+    z-index: 999;
+  }
+  .deploy-badge:hover { opacity: 0.8; }
+  .deploy-badge .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #22c55e;
+    flex-shrink: 0;
+    animation: pulse-dot 2.5s ease-in-out infinite;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.35; }
+  }
+  .deploy-badge .commit { color: #60a5fa; }
 </style>
 </head>
 <body>
@@ -542,6 +576,10 @@
           <input type="url" id="github" placeholder="github.com/seu-usuario">
         </div>
         <div class="social-field">
+          <div class="social-icon">💬</div>
+          <input type="tel" id="whatsapp-social" placeholder="(11) 99999-9999">
+        </div>
+        <div class="social-field">
           <div class="social-icon">🌐</div>
           <input type="url" id="outro-social" placeholder="Outra rede ou link">
         </div>
@@ -697,6 +735,7 @@
         linkedin:      val('linkedin'),
         tiktok:        val('tiktok'),
         github:        val('github'),
+        whatsappSocial: val('whatsapp-social'),
         outroSocial:   val('outro-social'),
         referencias:   getUrls(),
         obsRef:        val('obs-ref'),
@@ -723,6 +762,28 @@
     }
   }
 
+</script>
+<!-- Badge de deploy -->
+<a class="deploy-badge" id="deploy-badge" href="#" target="_blank" style="display:none">
+  <span class="dot"></span>
+  <span id="deploy-date">—</span>
+  &nbsp;·&nbsp;
+  <span class="commit" id="deploy-commit">—</span>
+</a>
+
+<script>
+  fetch('./deploy-info.json')
+    .then(r => r.json())
+    .then(info => {
+      const badge  = document.getElementById('deploy-badge');
+      const date   = new Date(info.deployedAt);
+      const label  = date.toLocaleString('pt-BR', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' });
+      document.getElementById('deploy-date').textContent   = label;
+      document.getElementById('deploy-commit').textContent = info.commit;
+      badge.href = 'https://github.com/MaykeCS/fabriqueta-ai/commit/' + info.commitFull;
+      badge.style.display = 'flex';
+    })
+    .catch(() => {}); // sem deploy-info.json (ambiente local) — oculta o badge
 </script>
 </body>
 </html>
