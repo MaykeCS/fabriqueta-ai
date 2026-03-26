@@ -316,8 +316,9 @@
     transition: all 0.2s;
     letter-spacing: 0.02em;
   }
-  .btn-submit:hover { background: #333; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+  .btn-submit:hover:not(:disabled) { background: #333; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
   .btn-submit:active { transform: translateY(0); }
+  .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
 
   .submit-note { font-size: 0.8rem; color: var(--muted); margin-top: 12px; }
 
@@ -332,36 +333,7 @@
   .success-screen h2 { font-family: 'DM Serif Display', serif; font-size: 2rem; font-weight: 400; margin-bottom: 12px; }
   .success-screen p { color: var(--muted); line-height: 1.7; }
 
-  /* Resultado para você (dev) */
-  .result-panel {
-    display: none;
-    background: #1a1a1a;
-    color: #e5e7eb;
-    border-radius: var(--radius);
-    padding: 28px;
-    margin-top: 24px;
-    font-family: monospace;
-    font-size: 0.82rem;
-    line-height: 1.8;
-    white-space: pre-wrap;
-    word-break: break-all;
-  }
-  .result-panel h3 { font-family: 'DM Sans', sans-serif; color: #60a5fa; margin-bottom: 16px; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; }
-  .copy-btn {
-    background: #2563eb;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.82rem;
-    cursor: pointer;
-    margin-bottom: 16px;
-    transition: background 0.2s;
-  }
-  .copy-btn:hover { background: #1d4ed8; }
-
-  @keyframes fadeUp {
+@keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
@@ -602,22 +574,19 @@
     </div>
   </div>
 
-  <!-- Resultado (visível após envio) -->
+  <!-- Tela de sucesso -->
   <div class="success-screen" id="success">
     <div class="check">✅</div>
     <h2>Briefing recebido!</h2>
     <p>Obrigado por preencher tudo com cuidado.<br>Em breve entraremos em contato para dar início ao seu site.</p>
-
-    <div class="result-panel" id="result-panel">
-      <h3>📋 Resumo do briefing (para uso interno)</h3>
-      <button class="copy-btn" onclick="copyResult()">Copiar tudo</button>
-      <div id="result-content"></div>
-    </div>
   </div>
 
 </div>
 
 <script>
+  // Cole aqui a URL gerada ao publicar o Apps Script como Web App
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw70rkI7OBZMmfMdDZjRwlp0d99ZDQoiN_lXT-zsOgu3Ks98KhiA1kjc_usp6WaCN6Y/exec';
+
   const filesMap = {};
 
   function handleFiles(key, files) {
@@ -670,91 +639,90 @@
   function val(id) { return document.getElementById(id)?.value?.trim() || '—'; }
   function radio(name) { return document.querySelector(`input[name="${name}"]:checked`)?.value || '—'; }
 
-  function enviarFormulario() {
+  // Converte um File em base64
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload  = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  async function enviarFormulario() {
     // Validação básica
-    const nome = val('nome');
+    const nome  = val('nome');
     const email = val('email');
-    const tipo = radio('tipo');
+    const tipo  = radio('tipo');
 
     if (nome === '—' || email === '—' || tipo === '—') {
       alert('Por favor, preencha pelo menos: Nome, E-mail e Tipo de site.');
       return;
     }
 
-    const briefing = `
-CLIENTE
-━━━━━━━━━━━━━━━━━━━━
-Nome:          ${val('nome')}
-Profissão:     ${val('profissao')}
-E-mail:        ${val('email')}
-WhatsApp:      ${val('whatsapp')}
+    const btn = document.querySelector('.btn-submit');
+    btn.disabled    = true;
+    btn.textContent = 'Enviando…';
 
-SITE
-━━━━━━━━━━━━━━━━━━━━
-Tipo:          ${radio('tipo')}
-Objetivo:      ${val('objetivo')}
+    try {
+      // Converte imagens para base64
+      const fotoFiles      = filesMap['foto']      || [];
+      const trabalhosFiles = filesMap['trabalhos'] || [];
 
-ESTILO VISUAL
-━━━━━━━━━━━━━━━━━━━━
-Personalidade: ${radio('estilo')}
-Cores:         ${getCores()}
-Cor exata:     ${val('cor-exata')}
+      const fotoBase64 = fotoFiles.length ? await fileToBase64(fotoFiles[0]) : null;
+      const fotoNome   = fotoFiles.length ? fotoFiles[0].name : null;
 
-CONTEÚDO
-━━━━━━━━━━━━━━━━━━━━
-Bio/Apresentação:
-    ${val('bio')}
+      const trabalhosBase64 = await Promise.all(
+        trabalhosFiles.map(async f => ({ base64: await fileToBase64(f), nome: f.name }))
+      );
 
-Serviços/Trabalhos:
-    ${val('servicos')}
+      const payload = {
+        nome:          val('nome'),
+        profissao:     val('profissao'),
+        email:         val('email'),
+        whatsapp:      val('whatsapp'),
+        tipo:          radio('tipo'),
+        objetivo:      val('objetivo'),
+        estilo:        radio('estilo'),
+        cores:         getCores(),
+        corExata:      val('cor-exata'),
+        bio:           val('bio'),
+        servicos:      val('servicos'),
+        depoimentos:   val('depoimentos'),
+        fotoBase64,
+        fotoNome,
+        trabalhosBase64,
+        obsImagens:    val('obs-imagens'),
+        instagram:     val('instagram'),
+        linkedin:      val('linkedin'),
+        tiktok:        val('tiktok'),
+        github:        val('github'),
+        outroSocial:   val('outro-social'),
+        referencias:   getUrls(),
+        obsRef:        val('obs-ref'),
+        naoQuero:      val('nao-quero'),
+      };
 
-Depoimentos:
-    ${val('depoimentos')}
+      const res  = await fetch(APPS_SCRIPT_URL, {
+        method:  'POST',
+        body:    JSON.stringify(payload),
+      });
+      const json = await res.json();
 
-ARQUIVOS ENVIADOS
-━━━━━━━━━━━━━━━━━━━━
-Foto/Logo:     ${filesMap['foto']?.map(f=>f.name).join(', ') || 'nenhum'}
-Portfólio:     ${filesMap['trabalhos']?.map(f=>f.name).join(', ') || 'nenhum'}
-Obs imagens:   ${val('obs-imagens')}
+      if (!json.success) throw new Error(json.error || 'Erro desconhecido');
 
-REDES SOCIAIS
-━━━━━━━━━━━━━━━━━━━━
-Instagram:     ${val('instagram')}
-LinkedIn:      ${val('linkedin')}
-TikTok:        ${val('tiktok')}
-GitHub:        ${val('github')}
-Outro:         ${val('outro-social')}
+      // Sucesso
+      document.getElementById('form-wrapper').style.display = 'none';
+      document.getElementById('success').style.display      = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
 
-REFERÊNCIAS
-━━━━━━━━━━━━━━━━━━━━
-Sites:
-    ${getUrls()}
-
-O que gosta:   ${val('obs-ref')}
-Não quer:      ${val('nao-quero')}
-    `.trim();
-
-    // Esconde o formulário, mostra sucesso
-    document.getElementById('form-wrapper').style.display = 'none';
-    const success = document.getElementById('success');
-    success.style.display = 'block';
-
-    // Mostra o painel interno com o resumo
-    const panel = document.getElementById('result-panel');
-    panel.style.display = 'block';
-    document.getElementById('result-content').textContent = briefing;
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    window._briefing = briefing;
+    } catch (err) {
+      alert('Erro ao enviar: ' + err.message);
+      btn.disabled    = false;
+      btn.textContent = 'Enviar briefing →';
+    }
   }
 
-  function copyResult() {
-    navigator.clipboard.writeText(window._briefing || '').then(() => {
-      const btn = document.querySelector('.copy-btn');
-      btn.textContent = 'Copiado ✓';
-      setTimeout(() => btn.textContent = 'Copiar tudo', 2000);
-    });
-  }
 </script>
 </body>
 </html>
